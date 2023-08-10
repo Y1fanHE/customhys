@@ -469,7 +469,6 @@ class Hyperheuristic:
         # PERTURBATOR (GENERATOR): Create the initial solution
         if initial_solution is not None:
             current_solution = initial_solution
-            print(f"used initial solution {initial_solution}")
         else:
             current_solution = self._obtain_candidate_solution()
 
