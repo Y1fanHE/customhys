@@ -440,7 +440,7 @@ class Hyperheuristic:
     def get_operators(self, sequence):
         return [self.heuristic_space[index] for index in sequence]
 
-    def solve(self, mode=None, save_steps=True):
+    def solve(self, mode=None, save_steps=True, initial_solution=None):
         mode = mode if mode is not None else self.parameters["solver"]
 
         if mode == 'dynamic':
@@ -448,9 +448,9 @@ class Hyperheuristic:
         elif mode == 'neural_network':
             return self._solve_neural_network(save_steps)
         else:  # default: 'static'
-            return self._solve_static(save_steps)
+            return self._solve_static(save_steps, initial_solution)
 
-    def _solve_static(self, save_steps=True):
+    def _solve_static(self, save_steps=True, initial_solution=None):
         """
         Run the hyper-heuristic based on Simulated Annealing (SA) to find the best metaheuristic. Each meatheuristic is
         run 'num_replicas' times to obtain statistics and then its performance. Once the process ends, it returns:
@@ -467,7 +467,11 @@ class Hyperheuristic:
         # %% INITIALISER PART
 
         # PERTURBATOR (GENERATOR): Create the initial solution
-        current_solution = self._obtain_candidate_solution()
+        if initial_solution is not None:
+            current_solution = initial_solution
+            print(f"used initial solution {initial_solution}")
+        else:
+            current_solution = self._obtain_candidate_solution()
 
         # Evaluate this solution
         current_performance, current_details = self.evaluate_candidate_solution(current_solution)
