@@ -9,7 +9,7 @@ Created on Thu Jan  9 15:36:43 2020
 
 import json
 import numpy as np
-import random
+import numpy.random as random
 import scipy.stats as st
 from datetime import datetime
 from os import makedirs as _create_path

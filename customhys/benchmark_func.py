@@ -387,7 +387,8 @@ class BasicProblem:
                     is_constrained=is_constrained,
                     features=self.get_features(fts=fts),
                     func_name=self.func_name,
-                    dimensions=self.variable_num)
+                    dimensions=self.variable_num,
+                    optimum_solution=self.optimal_solution)
 
 
 # %% SPECIFIC PROBLEM FUNCTIONS
